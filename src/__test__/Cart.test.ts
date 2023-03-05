@@ -6,7 +6,7 @@ import Gadget from '../domain/Gadget';
 
 test('should show movie from Cart', () => {
   const cart = new Cart();
-  cart.add(new Movie(1005, 'Мстители', 1, 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', false, 450));
+  cart.add(new Movie(1005, 'Мстители', 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', 450));
   expect(cart.items).toEqual([{
     id: 1005,
     name: 'Мстители',
@@ -23,25 +23,25 @@ test('should show movie from Cart', () => {
 
 test('should show totalCost without discount', () => {
   const cart = new Cart();
-  cart.add(new Movie(1005, 'Мстители', 1, 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', false, 450));
-  cart.add(new Book(1001, 'War and Piece', 1, 'Leo Tolstoy', 2000, false, 1225));
-  cart.add(new MusicAlbum(1008, 'Meteora', 1, 'Linkin Park', false, 900));
+  cart.add(new Movie(1005, 'Мстители', 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', 450));
+  cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
+  cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
   expect(cart.getTotalCost()).toBe(3350);
 });
 
 test('should show totalCost with discount', () => {
   const cart = new Cart();
-  cart.add(new Movie(1005, 'Мстители', 1, 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', false, 450));
-  cart.add(new Book(1001, 'War and Piece', 1, 'Leo Tolstoy', 2000, false, 1225));
-  cart.add(new MusicAlbum(1008, 'Meteora', 1, 'Linkin Park', false, 900));
+  cart.add(new Movie(1005, 'Мстители', 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', 450));
+  cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
+  cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
   expect(cart.getCostWithDiscount(10)).toBe(3015);
 });
 
 test('should delete item from cart', () => {
   const cart = new Cart();
-  cart.add(new Movie(1005, 'Мстители', 1, 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', false, 450));
-  cart.add(new Book(1001, 'War and Piece', 1, 'Leo Tolstoy', 2000, false, 1225));
-  cart.add(new MusicAlbum(1008, 'Meteora', 1, 'Linkin Park', false, 900));
+  cart.add(new Movie(1005, 'Мстители', 2012, 'США', '"Avengers Assemble!"', ['фантастика','боевик', 'фэнтези', 'приключения'], '137 мин. / 2:17', 450));
+  cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
+  cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
   cart.deleteFromCart(1001);
   expect(cart.items.length).toBe(2);
   expect(cart.items).toEqual([{
@@ -102,6 +102,6 @@ test('should reduce the quantity of gadget', () => {
 
 test('should not add item that cannot be multiply', () => {
   const cart = new Cart();
-  cart.add(new MusicAlbum(1008, 'Meteora', 1, 'Linkin Park', false, 900));
-  expect(() => cart.add(new MusicAlbum(1008, 'Meteora', 1, 'Linkin Park', false, 900))).toThrow(new Error('Товар продается в единственном экземпляре!'));
+  cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+  expect(() => cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900))).toThrow(new Error('Товар продается в единственном экземпляре!'));
 });

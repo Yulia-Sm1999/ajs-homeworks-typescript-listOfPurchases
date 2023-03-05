@@ -47,7 +47,7 @@ export default class Cart {
   }
 
   deleteFromCart(id: number): void {
-    const itemToDelete = this._items.findIndex(item => item.id === id);
-    this._items.splice(itemToDelete, 1);
+    const restItems = this._items.filter(item => item.id !== id);
+    this._items = restItems;
   }
 }
